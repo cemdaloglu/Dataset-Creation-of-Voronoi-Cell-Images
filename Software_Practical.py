@@ -34,14 +34,15 @@ warnings.filterwarnings("ignore")
 
 def vor_reg_creator(img_height: int, img_width: int, coords: list) -> Union[dict, Polygon]:
     '''
-    Takes the desired size of a rectangle and random point coordinates to find the coordinates of the corner points of the Voronoi scheme.
-    Returns the coordinates of those corner points and also the corner coordinates of the rectangle.
+    Takes the desired size of a rectangle and random point coordinates to find the coordinates of the corner points
+    of the Voronoi scheme. Returns the coordinates of those corner points and also the corner coordinates of the
+    rectangle.
 
     :param img_height: Height of the image.
-    :param img_widht: Width of the image.
+    :param img_width: Width of the image.
     :param coords: Coordinates of the random points, down left corner of the rectangle is the origin (0, 0).
-    :return region_polys (dict[Polygon]): Dictionary of polygon objects size of the number of random points. Each element of the dictionary
-      contains the coordinates of the corner points.
+    :return region_polys (dict[Polygon]): Dictionary of polygon objects size of the number of random points. Each
+        element of the dictionary contains the coordinates of the corner points.
     :return boundary_shape (Polygon): A polygon object which contains the coordinates of the rectangle's corner points.
     '''
 
@@ -71,8 +72,8 @@ def vor_plotting(coords: list, rand_point_no: int, region_polys: dict, boundary_
 
     :param coords: Coordinates of the random points, down left corner of the rectangle is the origin (0, 0).
     :param rand_point_no: Number of random points.
-    :param region_polys: Dictionary of polygon objects size of the number of random points. Each element of the dictionary
-      contains the coordinates of the corner points.
+    :param region_polys: Dictionary of polygon objects size of the number of random points. Each element of the
+        dictionary contains the coordinates of the corner points.
     :param boundary_shape: A polygon object which contains the coordinates of the rectangle's corner points.
     :param img_height: Height of the image.
     :param img_width: Width of the image.
@@ -80,6 +81,7 @@ def vor_plotting(coords: list, rand_point_no: int, region_polys: dict, boundary_
     :param line_color: Color of the line.
     :param img_no: The number that the current image will be saved with a name with that number.
     '''
+
     fig, ax = subplot_for_map(figsize=(img_width / 120, img_height / 120))
     crds = np.array(tuple(coords))
     for point_no in range(rand_point_no):
@@ -101,24 +103,22 @@ def vor_plotting(coords: list, rand_point_no: int, region_polys: dict, boundary_
     plt.close()
 
 
-def vor_plotting_rgb(coords: list, rand_point_no: int, region_polys: dict, boundary_shape: Polygon, img_width: int,
+def vor_plotting_rgb(rand_point_no: int, region_polys: dict, img_width: int,
                      img_height: int, line_width: int, line_color: str, img_no: int) -> None:
     '''
     This function saves a colored .png image with the desired line width, color, and name.
 
-    :param coords (list[float]): Coordinates of the random points, down left corner of the rectangle is the origin (0, 0).
-    :param rand_point_no (int): Number of random points.
-    :param region_polys (dict[Polygon]): Dictionary of polygon objects size of the number of random points. Each element of the dictionary
-      contains the coordinates of the corner points.
-    :param boundary_shape (Polygon): A polygon object which contains the coordinates of the rectangle's corner points.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :param line_width (int): Width of the line, 0 means no line.
-    :param line_color (str): Color of the line.
-    :param img_no (int): The number that the current image will be saved with a name with that number.
+    :param rand_point_no: Number of random points.
+    :param region_polys: Dictionary of polygon objects size of the number of random points. Each element of the
+      dictionary contains the coordinates of the corner points.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :param line_width: Width of the line, 0 means no line.
+    :param line_color: Color of the line.
+    :param img_no: The number that the current image will be saved with a name with that number.
     '''
+
     fig, ax = subplot_for_map(figsize=(img_width / 120, img_height / 120))
-    crds = np.array(tuple(coords))
     for point_no in range(rand_point_no):
         points = []
         for p_idx in range(len(region_polys[point_no].exterior.coords.xy[0])):
@@ -160,16 +160,17 @@ def vor_img_creator_trial(total_img, rand_point_no, img_height, img_width):
 def vor_bw_img_creator(total_img: int, rand_point_no: int, img_height: int, img_width: int, line_width: int,
                        line_color: str) -> None:
     '''
-    Takes how many black and white Voronoi images that will be constructed and creates the desired amount of random points for each Voronoi
-    image. Calls the vor_reg_creator and vor_plotting functions.
+    Takes how many black and white Voronoi images that will be constructed and creates the desired amount of random
+    points for each Voronoi image. Calls the vor_reg_creator and vor_plotting functions.
 
-    :param total_img (int): Number of Voronoi images that will be constructed.
-    :param rand_point_no (int): Number of random points.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :param line_width (int): Width of the line, 0 means no line.
-    :param line_color (str): Color of the line.
+    :param total_img: Number of Voronoi images that will be constructed.
+    :param rand_point_no: Number of random points.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :param line_width: Width of the line, 0 means no line.
+    :param line_color: Color of the line.
     '''
+
     for img_no in range(total_img):
         coords = []
         for point_no in range(rand_point_no):
@@ -184,16 +185,17 @@ def vor_bw_img_creator(total_img: int, rand_point_no: int, img_height: int, img_
 def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img_width: int, line_width: int,
                         line_color: str) -> None:
     '''
-    Takes how many colored Voronoi images that will be constructed and creates the desired amount of random points for each Voronoi
-    image. Calls the vor_reg_creator and vor_plotting functions.
+    Takes how many colored Voronoi images that will be constructed and creates the desired amount of random points for
+    each Voronoi image. Calls the vor_reg_creator and vor_plotting functions.
 
-    :param total_img (int): Number of Voronoi images that will be constructed.
-    :param rand_point_no (int): Number of random points.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :param line_width (int): Width of the line, 0 means no line.
-    :param line_color (str): Color of the line.
+    :param total_img: Number of Voronoi images that will be constructed.
+    :param rand_point_no: Number of random points.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :param line_width: Width of the line, 0 means no line.
+    :param line_color: Color of the line.
     '''
+
     for img_no in range(total_img):
         coords = []
         for point_no in range(rand_point_no):
@@ -201,7 +203,7 @@ def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img
             x_axis = random.uniform(0.0, img_width)
             coords.append([x_axis, y_axis])
         region_polys, boundary_shape = vor_reg_creator(img_height, img_width, coords)
-        vor_plotting_rgb(coords, rand_point_no, region_polys, boundary_shape, img_width, img_height, line_width,
+        vor_plotting_rgb(rand_point_no, region_polys, img_width, img_height, line_width,
                          line_color, img_no)
 
 
@@ -213,11 +215,12 @@ def img_to_tensor_bw(img: str, img_height: int, img_width: int) -> torch.Tensor:
     '''
     Takes the filename of a black and white image and returns a tensor.
 
-    :param img (str): Filename of the image whose tensors will be returned.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
+    :param img: Filename of the image whose tensors will be returned.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
     :return tensor (torch.Tensor): Tensor of the given image, return shape is (img_width, img_height)
     '''
+
     image = cv2.imread(img)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY).reshape(img_width, img_height, 1)
     transform = transforms.Compose([transforms.ToTensor()])
@@ -229,11 +232,12 @@ def img_to_tensor_colored(img: str, img_height: int, img_width: int) -> torch.Te
     '''
     Takes the filename of a colored image and returns a tensor.
 
-    :param img (str): Filename of the image whose tensors will be returned.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :return tensor (): Tensor of the given image, return shape is (3, img_width, img_height)
+    :param img: Filename of the image whose tensors will be returned.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :return tensor: Tensor of the given image, return shape is (3, img_width, img_height)
     '''
+
     image = cv2.imread(img)
     image = image.reshape(img_width, img_height, 3)
     transform = transforms.Compose([transforms.ToTensor()])
@@ -245,33 +249,35 @@ def tensor_out_bw(total_img: int, img_height: int, img_width: int) -> torch.Tens
     '''
     Takes the total number of bw images and returns the tensor of each image.
 
-    :param total_img (int): Filename of the image whose tensors will be returned.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :return tensor (): Tensor of the all images, return shape is (total_img, 1, img_width, img_height)
+    :param total_img: Filename of the image whose tensors will be returned.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :return tensor: Tensor of the all images, return shape is (total_img, 1, img_width, img_height)
     '''
-    output = img_to_tensor_bw('Image {}'.format(1) + '.png', img_height, img_width)
+
+    output_bw = img_to_tensor_bw('Image {}'.format(1) + '.png', img_height, img_width)
     for idx in range(total_img - 1):
-        output = torch.cat((output, img_to_tensor_bw('Image {}'.format(idx + 2) + '.png', img_height, img_width)))
-    output = output.reshape(total_img, 1, img_width, img_height)
-    return output
+        output_bw = torch.cat((output_bw, img_to_tensor_bw('Image {}'.format(idx + 2) + '.png', img_height, img_width)))
+    output_bw = output_bw.reshape(total_img, 1, img_width, img_height)
+    return output_bw
 
 
 def tensor_out_colored(total_img: int, img_height: int, img_width: int) -> torch.Tensor:
     '''
     Takes the total number of colored images and returns the tensor of each image.
 
-    :param total_img (int): Filename of the image whose tensors will be returned.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :return tensor (): Tensor of the all images, return shape is (total_img, 3, img_width, img_height)
+    :param total_img: Filename of the image whose tensors will be returned.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :return tensor: Tensor of the all images, return shape is (total_img, 3, img_width, img_height)
     '''
-    output = img_to_tensor_colored('Image_rgb {}'.format(1) + '.png', img_height, img_width)
+
+    output_rgb = img_to_tensor_colored('Image_rgb {}'.format(1) + '.png', img_height, img_width)
     for idx in range(total_img - 1):
-        output = torch.cat(
-            (output, img_to_tensor_colored('Image_rgb {}'.format(idx + 2) + '.png', img_height, img_width)))
-    output = output.reshape(total_img, 3, img_width, img_height)
-    return output
+        output_rgb = torch.cat(
+            (output_rgb, img_to_tensor_colored('Image_rgb {}'.format(idx + 2) + '.png', img_height, img_width)))
+    output_rgb = output_rgb.reshape(total_img, 3, img_width, img_height)
+    return output_rgb
 
 
 output = tensor_out_colored(total_img=5, img_height=400, img_width=600)
