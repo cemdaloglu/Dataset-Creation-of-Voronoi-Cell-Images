@@ -1,6 +1,5 @@
 # SOFTWARE-pRACT-CAL
-This repository creates Voronoi cells with preferred image size, number of cells, and line width.
-There are few parameters in the main function that should be decided by the user.
+  This repository creates Voronoi cells with preferred image size, number of cells, and line width. There are few parameters in the main function that should be decided by the user.
 Parameters:
   rgb_img should be chosen as True if one wants to construct colored Voronoi images.
   img_height, img_width are used to create the desired image size, they can be chosen any integer.
@@ -15,3 +14,5 @@ Parameters:
   
   vor_bw_img_creator is similar as the rgb one, the only difference is it saves a black and white images.
   tensor_our_bw is also similar as before but the output is (total_img, 1, img_width, img_height).
+
+  Sample results can be seen in the Results folder of this repository.
