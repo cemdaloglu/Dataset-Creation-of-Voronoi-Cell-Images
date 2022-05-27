@@ -17,4 +17,4 @@ Parameters:
 
   Sample results can be seen in the Results folder of this repository.
 
-![alt text]([https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png](https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%202_lines.png) "Logo Title Text 1")
+![]((https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%202_lines.png))
