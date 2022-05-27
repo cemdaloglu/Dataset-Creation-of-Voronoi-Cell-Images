@@ -207,10 +207,6 @@ def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img
                          line_color, img_no)
 
 
-vor_bw_img_creator(total_img=3, rand_point_no=8, img_height=300, img_width=450, line_width=4, line_color='blue')
-vor_rgb_img_creator(total_img=5, rand_point_no=15, img_height=400, img_width=600, line_width=1, line_color='red')
-
-
 def img_to_tensor_bw(img: str, img_height: int, img_width: int) -> torch.Tensor:
     '''
     Takes the filename of a black and white image and returns a tensor.
@@ -278,9 +274,3 @@ def tensor_out_colored(total_img: int, img_height: int, img_width: int) -> torch
             (output_rgb, img_to_tensor_colored('Image_rgb {}'.format(idx + 2) + '.png', img_height, img_width)))
     output_rgb = output_rgb.reshape(total_img, 3, img_width, img_height)
     return output_rgb
-
-
-output = tensor_out_colored(total_img=5, img_height=400, img_width=600)
-output_bw = tensor_out_bw(total_img=3, img_height=300, img_width=450)
-print(output.shape, output_bw.shape)
-
