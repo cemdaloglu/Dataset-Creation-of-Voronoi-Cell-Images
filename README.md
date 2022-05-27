@@ -17,4 +17,4 @@ Parameters:
 
   Sample results can be seen in the Results folder of this repository.
 
-![]((https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%202_lines.png))
+![alt text]((https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%202_lines.png))
