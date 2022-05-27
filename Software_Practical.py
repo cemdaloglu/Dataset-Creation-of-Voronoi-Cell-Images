@@ -138,25 +138,6 @@ def vor_plotting_rgb(rand_point_no: int, region_polys: dict, img_width: int,
     plt.close()
 
 
-def vor_img_creator_trial(total_img, rand_point_no, img_height, img_width):
-    """
-    Unnecessary
-    """
-    for img_no in range(total_img):
-        vor_arr = []
-        for point_no in range(rand_point_no):
-            y_axis = random.uniform(0.0, img_height)
-            x_axis = random.uniform(0.0, img_width)
-            vor_arr.append([x_axis, y_axis])
-        vor = Voronoi(vor_arr)
-        fig = voronoi_plot_2d(vor)
-        plt.title('Image {}'.format(img_no))
-        plt.xlim(0, img_width)
-        plt.ylim(0, img_height)
-        plt.savefig('Image {}'.format(img_no) + '.png')
-        plt.close()
-
-
 def vor_bw_img_creator(total_img: int, rand_point_no: int, img_height: int, img_width: int, line_width: int,
                        line_color: str) -> None:
     '''
