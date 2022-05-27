@@ -1,5 +1,6 @@
 # SOFTWARE-pRACT-CAL
   This repository creates Voronoi cells with preferred image size, number of cells, and line width. There are few parameters in the main function that should be decided by the user.
+  
 Parameters:
   * rgb_img should be chosen as True if one wants to construct colored Voronoi images.
   * img_height, img_width are used to create the desired image size, they can be chosen any integer.
