@@ -8,12 +8,12 @@ Parameters:
   * line_color must be a string, can be any color.
   * voronoi_cell_no is the total number of random points and also total number of Voronoi cells one wants in the output image.
   
-  **vor_rgb_img_creator** function should be called to construct a colored Voronoi image with the decided parameters. This function does not show any plots but saves them as .png files to the current directory.
+  <ins>vor_rgb_img_creator</ins> function should be called to construct a colored Voronoi image with the decided parameters. This function does not show any plots but saves them as .png files to the current directory.
  Image is saved as Image_rgb_#.png after the function execution.
-  To get a tensor output, one needs to use **tensor_out_colored** function. This function returns a tensor with size (total_img, 3, img_width, img_height).
+  To get a tensor output, one needs to use <ins>tensor_out_colored</ins> function. This function returns a tensor with size (total_img, 3, img_width, img_height).
   
-  **vor_bw_img_creator** is similar as the rgb one, the only difference is it saves a black and white images.
-  **tensor_our_bw** is also similar as before but the output is (total_img, 1, img_width, img_height).
+  <ins>vor_bw_img_creator</ins> is similar as the rgb one, the only difference is it saves a black and white images.
+  <ins>tensor_our_bw</ins> is also similar as before but the output is (total_img, 1, img_width, img_height).
 
   Sample results can be seen below.
 
