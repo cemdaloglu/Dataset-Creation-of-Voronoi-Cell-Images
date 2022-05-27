@@ -15,6 +15,11 @@ Parameters:
   **vor_bw_img_creator** is similar as the rgb one, the only difference is it saves a black and white images.
   **tensor_our_bw** is also similar as before but the output is (total_img, 1, img_width, img_height).
 
-  Sample results can be seen in the Results folder of this repository.
+  Sample results can be seen below.
 
-![alt text]((https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%202_lines.png))
+<p align="center">
+  <img src="https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%201.png" width="350" title="hover text">
+  <img src="https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image_rgb%202_lines.png" width="350" title="hover text">
+  <img src="https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image%201.png" width="350" title="hover text">
+  <img src="https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/Results/Image%202_lines.png" width="350" title="hover text">
+</p>
