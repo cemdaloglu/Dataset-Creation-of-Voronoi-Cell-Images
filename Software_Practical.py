@@ -255,3 +255,34 @@ def tensor_out_colored(total_img: int, img_height: int, img_width: int) -> torch
             (output_rgb, img_to_tensor_colored('Image_rgb {}'.format(idx + 2) + '.png', img_height, img_width)))
     output_rgb = output_rgb.reshape(total_img, 3, img_width, img_height)
     return output_rgb
+
+
+def tensor_out_2(total_img: int, img_height: int, img_width: int, line_width: int) -> torch.Tensor:
+    '''
+    Takes the total number of colored images and returns a tensor which contains unique values for each Voronoi
+    pixel, and 0 for the border pixels.
+
+    :param total_img: Filename of the image whose tensors will be returned.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :param line_width: Width of the line.
+    :return tensor (): Tensor of the all images, return shape is (total_img, img_width, img_height)
+    '''
+    img_gray_mode = cv2.imread('Image_rgb {}'.format(1) + '.png', 0)
+    img_gray_mode[:line_width, :] = 0
+    img_gray_mode[:, :line_width] = 0
+    img_gray_mode[img_gray_mode.shape[0] - line_width:, :] = 0
+    img_gray_mode[:, img_gray_mode.shape[1] - line_width:] = 0
+    transform = transforms.Compose([transforms.ToTensor()])
+    tensor = transform(img_gray_mode)
+
+    for idx in range(total_img - 1):
+        img_gray_mode2 = cv2.imread('Image_rgb {}'.format(idx + 2) + '.png', 0)
+        img_gray_mode2[:line_width, :] = 0
+        img_gray_mode2[:, :line_width] = 0
+        img_gray_mode2[img_gray_mode.shape[0] - line_width:, :] = 0
+        img_gray_mode2[:, img_gray_mode.shape[1] - line_width:] = 0
+        tensor2 = transform(img_gray_mode2)
+        tensor = torch.cat((tensor, tensor2))
+    tensor = tensor.reshape(total_img, img_width, img_height)
+    return tensor
