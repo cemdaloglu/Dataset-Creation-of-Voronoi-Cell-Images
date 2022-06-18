@@ -278,15 +278,20 @@ def tensor_out_2(total_img: int, img_height: int, img_width: int, line_width: in
 def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img_width: int, line_width: int,
                         line_color: str) -> torch.Tensor:
     '''
-    Takes how many colored Voronoi images that will be constructed and creates the desired amount of random points for each Voronoi
-    image. Calls the vor_reg_creator and vor_plotting functions.
+    Takes how many colored Voronoi images that will be constructed and creates the desired amount of random points for
+    each Voronoi image. This function creates a second Voronoi image with the same parameters but with different colors.
+    Then, creates two two tensors for the first image and the second mock image. Returns the sum of these two tensors
+    which will give unique values for each cell. After creating the tensor, it deletes the mock images.This function is
+    also calls the vor_reg_creator, vor_plotting, vor_plotting_rgb_mock, tensor_out_colored, and tensor_out_colored_mock
+    functions.
 
-    :param total_img (int): Number of Voronoi images that will be constructed.
-    :param rand_point_no (int): Number of random points.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
-    :param line_width (int): Width of the line, 0 means no line.
-    :param line_color (str): Color of the line.
+    :param total_img: Number of Voronoi images that will be constructed.
+    :param rand_point_no: Number of random points.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
+    :param line_width: Width of the line, 0 means no line.
+    :param line_color: Color of the line.
+    :return tensor3: Tensor of the all images, return shape is (total_img, 3, img_width, img_height)
     '''
     for img_no in range(total_img):
         coords = []
@@ -309,7 +314,7 @@ def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img
 
 
 def vor_plotting_rgb_mock(rand_point_no: int, region_polys: dict, img_width: int,
-                     img_height: int, line_width: int, line_color: str, img_no: int) -> None:
+                          img_height: int, line_width: int, line_color: str, img_no: int) -> None:
     '''
     This function saves a colored .png image with the desired line width, color, and name.
 
@@ -339,21 +344,23 @@ def vor_plotting_rgb_mock(rand_point_no: int, region_polys: dict, img_width: int
     plt.margins(0, 0)
     plt.gca().xaxis.set_major_locator(plt.NullLocator())
     plt.gca().yaxis.set_major_locator(plt.NullLocator())
-    plt.savefig('Image_rgb_mock {}'.format(img_no + 1) + '.png', dpi=120, format='png', bbox_inches='tight', pad_inches=0)
+    plt.savefig('Image_rgb_mock {}'.format(img_no + 1) + '.png', dpi=120, format='png', bbox_inches='tight',
+                pad_inches=0)
     plt.close()
 
 
 def tensor_out_colored_mock(total_img: int, img_height: int, img_width: int) -> torch.Tensor:
     '''
-    Takes the total number of colored images and returns the tensor of each image.
+    Takes the total number of colored mock images and returns the tensor of each image.
 
-    :param total_img (int): Filename of the image whose tensors will be returned.
-    :param img_height (int): Height of the image.
-    :param img_widht (int): Width of the image.
+    :param total_img: Filename of the image whose tensors will be returned.
+    :param img_height: Height of the image.
+    :param img_width: Width of the image.
     :return tensor (): Tensor of the all images, return shape is (total_img, 3, img_width, img_height)
     '''
-    output = img_to_tensor_colored('Image_rgb_mock {}'.format(1)+'.png', img_height, img_width)
-    for idx in range(total_img-1):
-        output = torch.cat((output, img_to_tensor_colored('Image_rgb_mock {}'.format(idx+2)+'.png', img_height, img_width)))
+    output = img_to_tensor_colored('Image_rgb_mock {}'.format(1) + '.png', img_height, img_width)
+    for idx in range(total_img - 1):
+        output = torch.cat(
+            (output, img_to_tensor_colored('Image_rgb_mock {}'.format(idx + 2) + '.png', img_height, img_width)))
     output = output.reshape(total_img, 3, img_width, img_height)
     return output
