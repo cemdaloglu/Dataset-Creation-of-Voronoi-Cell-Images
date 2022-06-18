@@ -150,7 +150,7 @@ def vor_bw_img_creator(total_img: int, rand_point_no: int, img_height: int, img_
                      img_no)
 
 
-def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img_width: int, line_width: int,
+"""def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img_width: int, line_width: int,
                         line_color: str) -> None:
     '''
     Takes how many colored Voronoi images that will be constructed and creates the desired amount of random points for
@@ -172,7 +172,7 @@ def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img
             coords.append([x_axis, y_axis])
         region_polys, boundary_shape = vor_reg_creator(img_height, img_width, coords)
         vor_plotting_rgb(rand_point_no, region_polys, img_width, img_height, line_width,
-                         line_color, img_no)
+                         line_color, img_no)"""
 
 
 def img_to_tensor_bw(img: str, img_height: int, img_width: int) -> torch.Tensor:
@@ -307,6 +307,7 @@ def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img
         os.remove('Image_rgb_mock {}'.format(idx + 1) + '.png')
     return tensor3
 
+
 def vor_plotting_rgb_mock(rand_point_no: int, region_polys: dict, img_width: int,
                      img_height: int, line_width: int, line_color: str, img_no: int) -> None:
     '''
@@ -340,6 +341,7 @@ def vor_plotting_rgb_mock(rand_point_no: int, region_polys: dict, img_width: int
     plt.gca().yaxis.set_major_locator(plt.NullLocator())
     plt.savefig('Image_rgb_mock {}'.format(img_no + 1) + '.png', dpi=120, format='png', bbox_inches='tight', pad_inches=0)
     plt.close()
+
 
 def tensor_out_colored_mock(total_img: int, img_height: int, img_width: int) -> torch.Tensor:
     '''
