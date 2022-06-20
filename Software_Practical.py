@@ -90,11 +90,12 @@ def vor_plotting(coords: list, rand_point_no: int, region_polys: dict, boundary_
     plt.close()
 
 
-def vor_plotting_rgb(rand_point_no: int, region_polys: dict, img_width: int,
+def vor_plotting_rgb(filename: str, rand_point_no: int, region_polys: dict, img_width: int,
                      img_height: int, line_width: int, line_color: str, img_no: int) -> None:
     '''
     This function saves a colored .png image with the desired line width, color, and name.
 
+    :param filename: Name of the file. Filename will be Image_rgb"filename" img_no.png
     :param rand_point_no: Number of random points.
     :param region_polys: Dictionary of polygon objects size of the number of random points. Each element of the
       dictionary contains the coordinates of the corner points.
@@ -121,7 +122,8 @@ def vor_plotting_rgb(rand_point_no: int, region_polys: dict, img_width: int,
     plt.margins(0, 0)
     plt.gca().xaxis.set_major_locator(plt.NullLocator())
     plt.gca().yaxis.set_major_locator(plt.NullLocator())
-    plt.savefig('Image_rgb {}'.format(img_no + 1) + '.png', dpi=120, format='png', bbox_inches='tight', pad_inches=0)
+    plt.savefig('Image_rgb' + filename + ' {}'.format(img_no + 1) + '.png', dpi=120, format='png', bbox_inches='tight',
+                pad_inches=0)
     plt.close()
 
 
@@ -244,18 +246,19 @@ def tensor_out_colored(total_img: int, img_height: int, img_width: int) -> torch
     return output_rgb
 
 
-def tensor_out_2(total_img: int, img_height: int, img_width: int, line_width: int) -> torch.Tensor:
+def tensor_out_2(file_name: str, total_img: int, img_height: int, img_width: int, line_width: int) -> torch.Tensor:
     '''
     Takes the total number of colored images and returns a tensor which contains unique values for each Voronoi
     pixel, and 0 for the border pixels.
 
+    :param file_name: Name of the file. Filename will be Image_rgb"filename" img_no.png
     :param total_img: Filename of the image whose tensors will be returned.
     :param img_height: Height of the image.
     :param img_width: Width of the image.
     :param line_width: Width of the line.
     :return tensor (): Tensor of the all images, return shape is (total_img, img_width, img_height)
     '''
-    img_gray_mode = cv2.imread('Image_rgb {}'.format(1) + '.png', 0)
+    img_gray_mode = cv2.imread('Image_rgb' + file_name + ' {}'.format(1) + '.png', 0)
     img_gray_mode[:line_width, :] = 0
     img_gray_mode[:, :line_width] = 0
     img_gray_mode[img_gray_mode.shape[0] - line_width:, :] = 0
@@ -264,7 +267,7 @@ def tensor_out_2(total_img: int, img_height: int, img_width: int, line_width: in
     tensor = transform(img_gray_mode)
 
     for idx in range(total_img - 1):
-        img_gray_mode2 = cv2.imread('Image_rgb {}'.format(idx + 2) + '.png', 0)
+        img_gray_mode2 = cv2.imread('Image_rgb' + file_name + ' {}'.format(idx + 2) + '.png', 0)
         img_gray_mode2[:line_width, :] = 0
         img_gray_mode2[:, :line_width] = 0
         img_gray_mode2[img_gray_mode.shape[0] - line_width:, :] = 0
@@ -300,17 +303,19 @@ def vor_rgb_img_creator(total_img: int, rand_point_no: int, img_height: int, img
             x_axis = random.uniform(0.0, img_width)
             coords.append([x_axis, y_axis])
         region_polys, boundary_shape = vor_reg_creator(img_height, img_width, coords)
-        vor_plotting_rgb(rand_point_no, region_polys, img_width, img_height, line_width,
+        vor_plotting_rgb("", rand_point_no, region_polys, img_width, img_height, line_width,
                          line_color, img_no)
-        vor_plotting_rgb_mock(rand_point_no, region_polys, img_width, img_height, line_width,
-                              line_color, img_no)
-    tensor3_1 = tensor_out_colored(total_img, img_height, img_width)
-    tensor3_2 = tensor_out_colored_mock(total_img, img_height, img_width)
-    tensor3 = (tensor3_1 + tensor3_2) / 2
+        vor_plotting_rgb("_mock", rand_point_no, region_polys, img_width, img_height, line_width,
+                         line_color, img_no)
+    tensor2 = tensor_out_2("", total_img=total_img, img_height=img_height, img_width=img_width,
+                           line_width=line_width)
+    tensor2_mock = tensor_out_2("_mock", total_img=total_img, img_height=img_height, img_width=img_width,
+                                line_width=line_width)
+    tensor3 = (tensor2 + tensor2_mock) / 2
 
     for idx in range(total_img):
         os.remove('Image_rgb_mock {}'.format(idx + 1) + '.png')
-    return tensor3
+    return tensor2, tensor3
 
 
 def vor_plotting_rgb_mock(rand_point_no: int, region_polys: dict, img_width: int,
