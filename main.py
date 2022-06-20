@@ -16,7 +16,7 @@ if __name__ == '__main__':
     Return shape is (total_img, img_width, img_height)
     tensor_3: Tensor of the labels of the all images. If there are repetitive colors tensor will return different
     values. In other words, in each image there will be as many labels as random points.
-    Return shape is (total_img, 3, img_width, img_height)
+    Return shape is (total_img, img_width, img_height)
     '''
 
     if rgb_img:
