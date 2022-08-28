@@ -40,4 +40,4 @@ Sample results for the second and the third tensor can be seen below.
   <img src="https://github.com/cemdaloglu/SOFTWARE-pRACT-CAL/blob/main/readme_images/tensor3_out.png" width="250" height="250" title="hover text">
 </p>
 
-The second tensor (left image) has four unique values and cells with same colors has the same unique value. In other words, second tensor basically labels the colors. The third tensor  (right image) has six unique values so it is labeling the cells.
+The second tensor (left image) has four unique values and cells with same colors has the same unique value. In other words, second tensor basically labels the colors. The third tensor  (right image) has six unique values so it is labeling the cells. Borders and the seperation lines have tensor value 0. Thus, the color black should not be in the color_list.
